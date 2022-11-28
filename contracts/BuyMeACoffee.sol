@@ -34,6 +34,25 @@ contract BuyMeACoffee {
             _name,
             _message
         ));
+           
+        emit NewMemo(
+            msg.sender,
+            block.timestamp,
+            _name,
+            _message
+        );
+
     }
 
+    function withDrawTips () public{
+        require(owner.send(address(this).balance));
+
+    }
+    
+    function getMemos() public view returns(Memo[] memory){
+        return memos;
+
+    }
+
+     
 }
