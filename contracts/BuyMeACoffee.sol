@@ -24,4 +24,16 @@ contract BuyMeACoffee {
     constructor() {
         owner = payable(msg.sender);
     }
+
+    function BuyCoffee(string memory _name, string memory _message) public payable {
+        require(msg.value > 0, "Can't buy coffee with 0 eth ");
+
+        memos.push(Memo(
+            msg.sender,
+            block.timestamp,
+            _name,
+            _message
+        ));
+    }
+
 }
