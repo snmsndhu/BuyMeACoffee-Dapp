@@ -6,6 +6,11 @@
 // global scope, and execute the script.
 const hre = require("hardhat");
 
+async function getBalance(address) {
+  const balanceBigInt = await hre.waffle.provider.getBalance(address);
+  return hre.ethers.utils.formatEther(balanceBigInt);
+}
+
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
