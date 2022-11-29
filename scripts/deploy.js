@@ -50,12 +50,21 @@ async function main() {
   console.log("== bought coffee ==");
   await printBalances(addresses);
 
-  await buyMeACoffee.connect(owner).withDrawTips;
+  await buyMeACoffee.connect(owner).withDrawTips();
+
+  console.log("== withdrawTips ==");
+  await printBalances(addresses);
+
+  console.log("== memos ==");
+  const memos = await buyMeACoffee.getMemos();
+  printMemos(memos);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
